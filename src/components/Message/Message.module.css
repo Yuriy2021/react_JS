@@ -1,0 +1,11 @@
+.reset {
+    background-color: none;
+    color: red;
+}
+.alert {
+  color: blue;
+}
+
+.primary {
+   color: chartreuse;
+}
