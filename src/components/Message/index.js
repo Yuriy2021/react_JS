@@ -1,8 +1,25 @@
 import React from 'react';
 import styles from './Message.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { List } from "@material-ui/core";
+import { ListItem, ListItemText } from "@material-ui/core";
 
-
+export const Chat = ({ name }) => {
+    return (
+        <ListItem>
+            <ListItemText>{name}</ListItemText>
+        </ListItem>
+    );
+};
+export const ChatList = ({ list }) => {
+    return (
+        <List>
+            {list.map((item) => (
+                <Chat key={item.id} {...item} />
+            ))}
+        </List>
+    )
+};
 export const Message = ({ color, text }) => {
     return (<span className={[styles.reset,
     color === 'primary' ? styles.primary : '',
@@ -16,11 +33,13 @@ export const MessageList = () => {
         const newMessageList = [...messageList];
         const newMessage = {
             author,
-            text
+            text,
+            id: Date.now()
         };
         newMessageList.push(newMessage);
         setMessageList(newMessageList);
     };
+    const inputRef = useRef();
 
     const resetForm = () => {
         setValue("");
@@ -29,10 +48,12 @@ export const MessageList = () => {
         event.preventDefault();
         sendMessage("user", value);
         resetForm();
+        inputRef.current.focus();
     };
     const onChangeMessageInput = (event) => {
         setValue(event.target.value);
     };
+
     useEffect(() => {
         if (messageList.length === 0) {
             return;
@@ -46,6 +67,26 @@ export const MessageList = () => {
 
     return (
         <div className="App-forma">
+            <ChatList
+                list={[
+                    {
+                        name: "chat1",
+                        id: "1"
+                    },
+                    {
+                        name: "chat2",
+                        id: "2"
+                    },
+                    {
+                        name: "chat3",
+                        id: "3"
+                    },
+                    {
+                        name: "chat4",
+                        id: "4"
+                    }
+                ]}
+            />
             <form onSubmit={onSubmitMessage}>
                 <input
                     onChange={onChangeMessageInput}
@@ -64,6 +105,11 @@ export const MessageList = () => {
                     ))
                 }
             </ul>
+
         </div>
+
+
+
     );
+
 };
