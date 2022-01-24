@@ -5,7 +5,7 @@ import { Message } from "./Message"
 export const MessageList = (props) => {
     return (
         <List>
-            {props.MessageList.map((item) => (
+            {props.messageList.map((item) => (
                 <Message key={item.id} {...item} />
             ))}
         </List>
