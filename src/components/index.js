@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { ChatList } from "./components/Chatlist";
+import { ChatList } from "./components/ChatList";
 import { MessageInput } from "./components/MessageInput";
 import { MessageList } from "./components/MessageList";
 
