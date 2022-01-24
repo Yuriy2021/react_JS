@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { ChatList } from "./components/ChatList";
-import { MessageInput } from "./components/MessageInput";
-import { MessageList } from "./components/MessageList";
+import { ChatList } from "./ChatList.js";
+import { MessageInput } from "./MessageInput";
+import { MessageList } from "./MessageList";
 
 const useStyles = makeStyles({
     wrapper: {
