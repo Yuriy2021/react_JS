@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { ChatList } from "./ChatList.js";
+import { ChatList } from "./ChatList";
 import { MessageInput } from "./MessageInput";
 import { MessageList } from "./MessageList";
+import { BrowserRouter, Switch, Routes, Route, Link } from 'react-router-dom';
+import { AppBar, Toolbar, Button } from "@material-ui/core";
+import { Home } from "../routes/Home";
+import { Chats } from "../routes/Chats";
+import { Profile } from "../routes/Profile";
+
 
 const useStyles = makeStyles({
     wrapper: {
@@ -12,64 +18,29 @@ const useStyles = makeStyles({
 });
 
 export const Format = () => {
-    const classes = useStyles();
-    const [messageList, setMessageList] = useState([]);
-
-    const sendMessage = (author, text) => {
-        const newMessageList = [...messageList];
-        const newMessage = {
-            author,
-            text,
-            id: Date.now(),
-        };
-        newMessageList.push(newMessage);
-        setMessageList(newMessageList);
-    };
-
-    const onSendMessage = (value) => {
-        sendMessage("user", value);
-    };
-
-    useEffect(() => {
-        if (messageList.length === 0) {
-            return;
-        }
-        const tail = messageList[messageList.length - 1];
-        if (tail.author === "bot") {
-            return;
-        }
-        sendMessage("bot", "Welcome");
-    }, [messageList]);
     return (
-        <div className={classes.wrapper}>
-            <ChatList
-                list={[
-                    {
-                        name: "name",
-                        id: "1"
-                    },
-                    {
-                        name: "name",
-                        id: "2"
-                    },
-                    {
-                        name: "name",
-                        id: "3"
-                    },
-                    {
-                        name: "name",
-                        id: "4"
-                    }
+        <div>
+            <BrowserRouter>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Button to="/" component={Link} color="inherit">
+                            Home
+                        </Button>
+                        <Button to="/Profile" component={Link} color="inherit">
+                            Profile
+                        </Button>
 
-                ]}
-            />
-            <div>
-                <MessageList messageList={messageList} />
-                <MessageInput onSend={onSendMessage} />
-            </div>
+                        <Button to="/Chats" component={Link} color="inherit">
+                            Chats
+                        </Button>
+                    </Toolbar>
+                </AppBar>
+                <Routes>
+                    <Route element={<Chats />} path="/chats" />
+                    <Route element={<Profile />} path="/profile" />
+                    <Route element={<Home />} path="/" />
+                </Routes>
+            </BrowserRouter>
         </div>
-
     );
 };
-
-
