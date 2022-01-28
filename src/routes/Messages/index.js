@@ -36,6 +36,7 @@ export const Messages = () => {
     if (!CHATS.find(({ id }) => id === chatId)) {
         return <Navigate to="/chats" />;
     }
+
     return (
         <>
             <MessageList messageList={messageList} />
