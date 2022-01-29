@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import { MessageInput } from "../../components/MessageInput";
 import { MessageList } from "../../components/MessageList";
 import { CHATS } from "../../mocks/chats";
@@ -34,7 +34,7 @@ export const Messages = () => {
         sendMessage("bot", "hello");
     }, [messageList]);
     if (!CHATS.find(({ id }) => id === chatId)) {
-        return <Navigate to="/chats" />;
+        return <Redirect to="/chats" />;
     }
 
     return (
