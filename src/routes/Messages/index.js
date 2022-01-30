@@ -8,6 +8,7 @@ import { CHATS } from "../../mocks/chats";
 export const Messages = () => {
     const { chatId } = useParams();
     const [messageList, setMessageList] = useState([]);
+    console.log([messageList, setMessageList]);
 
     const sendMessage = (author, text) => {
         const newMessageList = [...messageList];

@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { ChatList } from "../../components/ChatList";
-import { Messages } from "../Messages";
+
 import { CHATS } from "../../mocks/chats";
 
 const useStyles = makeStyles({
@@ -17,11 +17,7 @@ export const Chats = () => {
 
         <div className={classes.wrapper}>
             <ChatList list={CHATS} />
-            <div>
-                <Switch>
-                    <Route component={Messages} path="/chats/:chatId" />
-                </Switch>
-            </div>
+
         </div>
     );
 };

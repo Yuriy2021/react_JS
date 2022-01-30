@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Chat = ({ id, name }) => {
     return (
-        <ListItem component={Link} to={id}>
+        <ListItem component={Link} to={`/chats/${id}`}>
             <ListItemText>{name}</ListItemText>
         </ListItem>
     );

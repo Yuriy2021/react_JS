@@ -8,6 +8,7 @@ import { AppBar, Toolbar, Button } from "@material-ui/core";
 import { Home } from "../routes/Home";
 import { Chats } from "../routes/Chats";
 import { Profile } from "../routes/Profile";
+import { Messages } from "../routes/Messages";
 
 
 const useStyles = makeStyles({
@@ -36,9 +37,10 @@ export const Format = () => {
                     </Toolbar>
                 </AppBar>
                 <Switch>
-                    <Route component={Chats} path="/chats" />
-                    <Route component={Profile} path="/profile" />
-                    <Route component={Home} path="/" />
+                    <Route exact component={Chats} path="/chats" />
+                    <Route exact component={Messages} path="/chats/:chatId" />
+                    <Route exact component={Profile} path="/profile" />
+                    <Route exact component={Home} path="/" />
                 </Switch>
             </BrowserRouter>
         </div>
