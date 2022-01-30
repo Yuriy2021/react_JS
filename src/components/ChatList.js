@@ -8,6 +8,7 @@ export const ChatList = ({list}) => {
         {list.map((item) => (
             <Chat key={item.id} {...item} />
         ))}
+        <Chat id="1" name= "wrong" />
         </List>
     );
  };
