@@ -10,7 +10,7 @@ export const Profile = () => {
         <div>
             <h1>Profile</h1>
 
-            <input type="checkbox" defaultChecked={isShow} onChanged={() => {
+            <input type="checkbox" defaultChecked={isShow} onChange={() => {
                 dispatch({
                     type: TOGGLE_SHOW_PROFILE
                 })
