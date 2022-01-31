@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { TOGGLE_SHOW_PROFILE } from "../../store/profile/action";
 
+
 export const Profile = () => {
     const dispatch = useDispatch();
     const isShow = useSelector((state) => state.isShow);
@@ -8,11 +9,15 @@ export const Profile = () => {
     return (
         <div>
             <h1>Profile</h1>
-            <input type="checkbox" checked={isShow} onChanged={() => {
+
+            <input type="checkbox" defaultChecked={isShow} onChanged={() => {
                 dispatch({
                     type: TOGGLE_SHOW_PROFILE
                 })
             }} />
+
+
+
         </div>
     );
 };
