@@ -5,6 +5,7 @@ import { MessageList } from "../../components/MessageList";
 import { CHATS } from "../../mocks/chats";
 
 
+
 export const Messages = () => {
     const { chatId } = useParams();
     const [messageList, setMessageList] = useState([]);
