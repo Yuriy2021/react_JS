@@ -10,6 +10,7 @@ import { createChat, removeChat, setChats } from "../../store/chats/actions";
 import { nanoid } from "nanoid";
 import { CHATS } from "../../mocks/chats";
 import { removeMessagesByChatID } from "../../store/messages/actions";
+import { withChats } from "../../hocs/withChats";
 
 
 const useStyles = makeStyles({
@@ -18,31 +19,18 @@ const useStyles = makeStyles({
         gridTemplateColumns: "200px 1fr"
     }
 });
-
-export const Chats = () => {
+export const ChatsRender = ({
+    chats,
+    onCreateChat,
+    onDeleteChat
+}) => {
     const classes = useStyles();
-    const chats = useSelector(getChatList);
-    const dispatch = useDispatch();
 
-    const onCreate = useCallback(() => {
-        dispatch(createChat({
-            id: nanoid(),
-            name: 'chatName'
-        }))
-    }, []);
-    const onDelete = (chatId) => {
-        dispatch(removeChat(chatId))
-        dispatch(removeMessagesByChatID(chatId))
-    }
-    useEffect(() => {
-        dispatch(setChats(CHATS))
-    }, [])
     return (
-
         <div className={classes.wrapper}>
             <div>
-                <ChatList onDelete={onDelete} list={chats} />
-                <Button onClick={onCreate}> Create chat</Button>
+                <ChatList onDelete={onDeleteChat} list={chats} />
+                <Button onClick={onCreateChat}>Create chat</Button>
             </div>
             <div>
                 <Switch>
@@ -52,3 +40,4 @@ export const Chats = () => {
         </div>
     );
 };
+export const Chats = withChats(ChatsRender);

@@ -6,43 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getChatMessagesById } from "../../store/messages/selectors";
 import { createMessage } from "../../store/messages/actions";
 import { hasChatById } from "../../store/chats/selectors";
+import { withChatMessages } from "../../hocs/withChatMessages";
+import { Redirect } from "react-router-dom";
 
 
 
-export const Messages = () => {
-    const { chatId } = useParams();
-    const dispatch = useDispatch();
-    const messageList = useSelector(getChatMessagesById(chatId));
-    const hasChat = useSelector(hasChatById(chatId));
-
-    const sendMessage = (author, text) => {
-
-        const newMessage = {
-            author,
-            text
-        };
-        dispatchEvent(createMessage(newMessage, chatId))
-
-    };
-
-    const onSendMessage = (value) => {
-        sendMessage("user", value);
-    };
-
-    useEffect(() => {
-        if (!messageList || messageList.length === 0) {
-            return;
-        }
-        const tail = messageList[messageList.length - 1];
-        if (tail.author === 'bot') {
-            return;
-        }
-        sendMessage("bot", "hello");
-    }, [messageList]);
+export const MessagesRender = ({
+    messageList,
+    hasChat,
+    onSendMessage, }) => {
     if (!hasChat) {
         return <Redirect to="/chats" />;
     }
-
     return (
         <>
             <MessageList messageList={messageList} />
@@ -50,3 +25,5 @@ export const Messages = () => {
         </>
     );
 };
+
+export const Messages = withChatMessages(MessagesRender);
