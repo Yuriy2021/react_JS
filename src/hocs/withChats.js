@@ -1,12 +1,13 @@
-import { Component, useCallback } from "react";
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getChatList } from "../store/chats/selectors.js";
 import { createChat, removeChat } from "../store/chats/actions";
+import { removeMessagesByChatID } from "../store/messages/actions";
 
 
 
-export const withChats = (Comment) => {
+export const withChats = (Component) => {
     return (props) => {
         const chats = useSelector(getChatList);
         const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export const withChats = (Comment) => {
 
         const onDeleteChat = useCallback((chatId) => {
             dispatch(removeChat(chatId))
+            dispatch(removeMessagesByChatID(chatId))
 
         }, [])
 
