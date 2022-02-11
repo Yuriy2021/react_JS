@@ -1,3 +1,4 @@
+import { BOT_AUTHOR } from "../../constants/authors";
 export const CREATE_MESSAGE = 'CREATE_MESSAGE'
 export const REMOVE_MESSAGES_BY_CHAT_ID = 'REMOVE_MESSAGES_BY_CHAT_ID'
 
@@ -15,11 +16,11 @@ export const removeMessagesByChatID = (chatId) => ({
 })
 export const sendMessageWithThunk = (author, text, chatId) => (dispatch) => {
     const userMessage = createMessage(author, text)
-    dispatch(addMessage(userMessage, chatId));
+    dispatch(userMessage, chatId);
 
     if (author === BOT_AUTHOR) {
         return;
     }
     const botMessage = createMessage(BOT_AUTHOR, 'Hello')
-    dispatch(addMessage(botMessage, chatId));
+    dispatch(botMessage, chatId);
 }

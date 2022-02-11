@@ -7,7 +7,7 @@ import { getChatMessagesById } from "../../store/messages/selectors";
 import { createMessage } from "../../store/messages/actions";
 import { hasChatById } from "../../store/chats/selectors";
 import { withChatMessages } from "../../hocs/withChatMessages";
-import { Redirect } from "react-router-dom";
+
 
 
 

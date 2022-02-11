@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
     messages: messagesReducer,
     chats: chatsReducer,
 })
-const persistReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ||
     compose;

@@ -10,7 +10,7 @@ import { Chats } from "../routes/Chats";
 import { Profile } from "../routes/Profile";
 import { Messages } from "../routes/Messages";
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store';
+import { store, persistor } from '../store';
 import { Provider } from 'react-redux';
 
 
