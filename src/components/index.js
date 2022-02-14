@@ -8,6 +8,7 @@ import { Profile } from "../routes/Profile";
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../store';
 import { Provider } from 'react-redux';
+import { FetchExample } from "../routes/Gists";
 
 
 const useStyles = makeStyles({
@@ -34,12 +35,18 @@ export const Format = () => {
                             <Button to="/Chats" component={Link} color="inherit">
                                 Chats
                             </Button>
+                            <Button to="/gists" component={Link} color="inherit">
+                                Gists
+                            </Button>
                         </Toolbar>
                     </AppBar>
                     <Switch>
                         <Route exact component={Chats} path="/chats" />
                         <Route exact component={Profile} path="/profile" />
                         <Route exact component={Home} path="/" />
+                        <Route path="/gists">
+                            <FetchExample />
+                        </Route>
                     </Switch>
                 </BrowserRouter>
             </PersistGate>
