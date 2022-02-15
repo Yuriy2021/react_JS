@@ -20,7 +20,7 @@ export const setData = (todos) => ({
 const USERS_API = "https://reqres.in/api/users?page=2&per_page=2";
 
 
-export const getUsersWithThunk = (page = 1) => async (dispatch) => {
+export const getUsersWithThunk = async (dispatch) => {
 
     dispatch(setLoading(true))
     dispatch(setError(false))
@@ -29,16 +29,15 @@ export const getUsersWithThunk = (page = 1) => async (dispatch) => {
     try {
         const response = await fetch(USERS_API);
         if (!response.ok) {
-            throw new Error ('any error')
+            throw new Error('any error')
         }
         const result = await response.json()
 
-        dispatch (setData(result))
-    } catch(e){
+        dispatch(setData(result))
+    } catch (e) {
         console.error(e);
         dispatch(setError(true))
     }
     dispatch(setLoading(false))
 }
-       
-        
+
