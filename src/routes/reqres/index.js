@@ -11,7 +11,7 @@ const initialState = {
   total_pages: 0,
   data: [],
 }
-export const FetchExample = (props) => {
+export const FetchReqres = (props) => {
   const [users, setUsers] = useState(initialState);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(undefined);
@@ -113,15 +113,7 @@ export const FetchExample = (props) => {
               {index + 1}
             </Button>))}
       </Stack>
-      <Button
-        onClick={() => {
-          if (users.page + 1 <= users.total_pages) {
-            fetchLoadMoreUsers(users.page + 1)
-          }
-        }}
-      >
-        load more ...
-      </Button>
+      
     </div>
   );
 };

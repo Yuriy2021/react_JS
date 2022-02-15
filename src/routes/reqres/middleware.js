@@ -8,7 +8,7 @@ import { Loader } from "../../components/Loader";
 
 
 
-export const MiddlewareExample = (props) => {
+export const MiddlewareReqRes = (props) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getLoading)
   const error = useSelector(getError)
