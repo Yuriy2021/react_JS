@@ -42,12 +42,14 @@ export const Format = () => {
                             <Button to="/reqres/middleware" component={Link} color="inherit">
                                 MiddlewareReqRes
                             </Button>
+
                         </Toolbar>
                     </AppBar>
                     <Switch>
                         <Route exact component={Chats} path="/chats" />
                         <Route exact component={Profile} path="/profile" />
                         <Route exact component={Home} path="/" />
+
                         <Route path="/reqres/middleware">
                             <MiddlewareReqRes />
                         </Route>
