@@ -1,4 +1,10 @@
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { Button, Form, Alert } from "react-bootstrap";
+import {auth} from "../firebase";
+
 export const Login = () => {
+    const { push } = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -12,47 +18,52 @@ export const Login = () => {
     };
 
     const handleSubmit = async (e) => {
+        console.log(email, password);
         e.preventDefault();
-        setError("");
 
         try {
-            await firebase.auth().signInWithEmailAndPassword(email, password);
-        } catch (error) {
-            setError(error.message);
+            await auth.signInWithEmailAndPassword(email, password);
+
+            push("/profile");
+        } catch (e) {
+            setError(e);
         }
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <p>Fill in the form below to login to your account.</p>
-                <div>
-                    <input
-                        placeholder="Email"
-                        name="email"
-                        type="email"
-                        onChange={handleEmailChange}
-                        value={email}
-                    />
-                </div>
-                <div>
-                    <input
-                        placeholder="Password"
-                        name="password"
-                        onChange={handlePassChange}
-                        value={password}
-                        type="password"
-                    />
-                </div>
-                <div>
-                    {error && <p>{error}</p>}
-                    <button type="submit">Login</button>
-                </div>
-                <hr />
-                <p>
-                    Don't have an account? <Link to="/signup">Sign up</Link>
-                </p>
-            </form>
-        </div>
+        <Form onSubmit={handleSubmit}>
+            <h1>Login</h1>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    name="email"
+                    onChange={handleEmailChange}
+                    value={email}
+                />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    onChange={handlePassChange}
+                    value={password}
+                />
+            </Form.Group>
+
+            {error && <Alert>{error.toString()}</Alert>}
+
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+            <hr />
+            <p>
+                Already have an account? <Link to="/signup">Sign up</Link>
+            </p>
+        </Form>
     );
 };

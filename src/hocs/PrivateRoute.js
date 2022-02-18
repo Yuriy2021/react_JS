@@ -1,10 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-export default function PrivateRoute({ authenticated, ...rest }) {
-    return authenticated ? (
+export function PrivateRoute({ auth, ...rest }) {
+    return auth ? (
         <Route {...rest} />
     ) : (
-        <Redirect to={{ pathname: "/login" }} />
+        <Redirect
+            to={{
+                pathname: "/login"
+            }}
+        />
     );
 }
