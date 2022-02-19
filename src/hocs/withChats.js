@@ -1,9 +1,16 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getChatList } from "../store/chats/selectors.js";
-import { createChat, removeChat } from "../store/chats/actions";
-import { removeMessagesByChatID } from "../store/messages/actions";
+import { createChat } from "../helpers";
+import {
+    addChat,
+    addChatWithThunk,
+    offTrackingAddChatWithThunk, offTrackingRemoveChatWithThunk,
+    onTrackingAddChatWithThunk, onTrackingRemoveChatWithThunk,
+    removeChat, removeChatWithThunk
+} from "../store/chats/actions";
+import { removeMessagesByChatID, removeMessagesByChatIDWithThunk } from "../store/messages/actions";
 
 
 
@@ -13,13 +20,23 @@ export const withChats = (Component) => {
         const dispatch = useDispatch();
 
         const onCreateChat = useCallback(() => {
-            dispatch(createChat('chat name'))
+            dispatch(addChatWithThunk(createChat('chat name')))
         }, []);
 
         const onDeleteChat = useCallback((chatId) => {
-            dispatch(removeChat(chatId))
-            dispatch(removeMessagesByChatID(chatId))
+            dispatch(removeChatWithThunk(chatId))
+            dispatch(removeMessagesByChatIDWithThunk(chatId))
 
+        }, [])
+
+        useEffect(() => {
+            dispatch(onTrackingAddChatWithThunk);
+            dispatch(onTrackingRemoveChatWithThunk);
+
+            return () => {
+                dispatch(offTrackingAddChatWithThunk);
+                dispatch(offTrackingRemoveChatWithThunk);
+            }
         }, [])
 
         return <Component
