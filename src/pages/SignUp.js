@@ -1,3 +1,9 @@
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { Button, Form, Alert } from "react-bootstrap";
+import {auth} from "../firebase";
+import firebase from "firebase";
+
 export const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
