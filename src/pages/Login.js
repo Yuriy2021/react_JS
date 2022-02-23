@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Form, Alert } from "react-bootstrap";
-import {auth} from "../firebase";
+import { auth } from "../firebase";
+
+export const LoginFormTestIds = {
+    submit: 'LoginForm-submit',
+    reset: 'LoginForm-reset',
+    loginField: 'LoginForm-loginField',
+    passwordField: 'LoginForm-passwordField',
+}
 
 export const Login = () => {
     const { push } = useHistory();
